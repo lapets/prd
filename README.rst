@@ -4,7 +4,11 @@ prd
 
 Idiomatic implementation of a Python function that calculates the product of the items from an iterable.
 
-|actions| |coveralls|
+|pypi| |actions| |coveralls|
+
+.. |pypi| image:: https://badge.fury.io/py/prd.svg
+   :target: https://badge.fury.io/py/prd
+   :alt: PyPI version and link.
 
 .. |actions| image:: https://github.com/lapets/prd/workflows/lint-test-cover/badge.svg
    :target: https://github.com/lapets/prd/actions/workflows/lint-test-cover.yml
