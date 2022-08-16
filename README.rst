@@ -4,14 +4,18 @@ prd
 
 Idiomatic implementation of a Python function that calculates the product of the items from an iterable.
 
-|pypi| |actions| |coveralls|
+|pypi| |readthedocs| |actions| |coveralls|
 
 .. |pypi| image:: https://badge.fury.io/py/prd.svg
    :target: https://badge.fury.io/py/prd
    :alt: PyPI version and link.
 
-.. |actions| image:: https://github.com/lapets/prd/workflows/lint-test-cover/badge.svg
-   :target: https://github.com/lapets/prd/actions/workflows/lint-test-cover.yml
+.. |readthedocs| image:: https://readthedocs.org/projects/prd/badge/?version=latest
+   :target: https://prd.readthedocs.io/en/latest/?badge=latest
+   :alt: Read the Docs documentation status.
+
+.. |actions| image:: https://github.com/lapets/prd/actions/workflows/lint-test-cover-docs.yml/badge.svg
+   :target: https://github.com/lapets/prd/actions/workflows/lint-test-cover-docs.yml
    :alt: GitHub Actions status.
 
 .. |coveralls| image:: https://coveralls.io/repos/github/lapets/prd/badge.svg?branch=main
@@ -84,9 +88,17 @@ The ``start`` parameter and the elements found in the iterable can be of differe
 
 Development
 -----------
-All installation and development dependencies are fully specified in ``pyproject.toml``. The ``project.optional-dependencies`` object is used to `specify optional requirements <https://peps.python.org/pep-0621>`__ for various development tasks. This makes it possible to specify additional options (such as ``test``, ``lint``, and so on) when performing installation using `pip <https://pypi.org/project/pip>`__::
+All installation and development dependencies are fully specified in ``pyproject.toml``. The ``project.optional-dependencies`` object is used to `specify optional requirements <https://peps.python.org/pep-0621>`__ for various development tasks. This makes it possible to specify additional options (such as ``docs``, ``lint``, and so on) when performing installation using `pip <https://pypi.org/project/pip>`__::
 
-    python -m pip install .[test,lint]
+    python -m pip install .[docs,lint]
+
+Documentation
+^^^^^^^^^^^^^
+The documentation can be generated automatically from the source files using `Sphinx <https://www.sphinx-doc.org>`__::
+
+    python -m pip install .[docs]
+    cd docs
+    sphinx-apidoc -f -E --templatedir=_templates -o _source .. && make html
 
 Testing and Conventions
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -118,11 +130,16 @@ This library can be published as a `package on PyPI <https://pypi.org/project/pr
 
     python -m pip install .[publish]
 
-Remove any old build/distribution files and package the source into a distribution archive::
+Ensure that the correct version number appears in ``pyproject.toml``, and that any links in this README document to the Read the Docs documentation of this package (or its dependencies) have appropriate version numbers. Also ensure that the Read the Docs project for this library has an `automation rule <https://docs.readthedocs.io/en/stable/automation-rules.html>`__ that activates and sets as the default all tagged versions. Create and push a tag for this version (replacing ``?.?.?`` with the version number)::
+
+    git tag ?.?.?
+    git push origin ?.?.?
+
+Remove any old build/distribution files. Then, package the source into a distribution archive::
 
     rm -rf build dist src/*.egg-info
     python -m build --sdist --wheel .
 
-Finally, upload the package distribution archive to `PyPI <https://pypi.org>`__ using the `twine <https://pypi.org/project/twine>`__ package::
+Finally, upload the package distribution archive to `PyPI <https://pypi.org>`__::
 
     python -m twine upload dist/*
