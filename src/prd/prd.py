@@ -74,5 +74,5 @@ def prd(iterable: Iterable, start: Optional[Any] = 1) -> Any:
             raise TypeError('argument must support iteration') from None
         raise
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     doctest.testmod() # pragma: no cover
