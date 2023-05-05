@@ -1,6 +1,6 @@
 [project]
 name = "prd"
-version = "0.2.0"
+version = "0.3.0"
 description = """\
     Idiomatic implementation of a Python function that calculates the product \
     of the items from an iterable.\
